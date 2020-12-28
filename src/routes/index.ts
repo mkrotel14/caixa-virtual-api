@@ -1,5 +1,11 @@
-import {Router} from 'express'
+import {Router} from 'express';
 
-const routes = Router()
+import wallet from './wallet';
+import transactions from './transactions';
+
+const routes = Router();
+
+routes.use('/wallet', wallet);
+routes.use('/transactions', transactions);
 
 export default routes;

@@ -7,8 +7,8 @@ export default class Wallet {
   id: string;
 
   @Column()
-  totalAmount: number
+  totalAmount: number;
 
   @OneToMany(() => Transactions, (transactions) => transactions.wallet)
-  transaction: Transactions[]
+  transaction: Transactions[];
 }

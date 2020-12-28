@@ -7,5 +7,5 @@ export default class Client {
   _id: string;
 
   @OneToOne(() => Wallet, (wallet) => wallet.id)
-  wallet: Wallet
+  wallet: Wallet;
 }
