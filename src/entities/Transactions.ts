@@ -1,9 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-enum Category {
-  INCOMING = 'Incoming',
-  OUTGOING = 'Outgoing'
-}
+import {Category} from 'src/enum/Category'
 
 @Entity('transactions')
 export default class Transactions {
@@ -16,15 +12,15 @@ export default class Transactions {
   @Column()
   amount: number
 
-  @Column()
-  description: string
-
   @Column({
     type: 'enum',
     enum: Category,
     default: Category.INCOMING
   })
   category: Category
+
+  @Column()
+  description: string
 
   @Column({type: 'timestamp'})
   date: Date
