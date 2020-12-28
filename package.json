@@ -1,0 +1,26 @@
+{
+  "name": "caixa-virtual-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "repository": "git@github.com:GianMantuan/caixa-virtual-api.git",
+  "author": "Gian Carlo Mantuan <giancarlo.mdr@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.16",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "add": "^2.0.6",
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29",
+    "yarn": "^1.22.10"
+  }
+}
