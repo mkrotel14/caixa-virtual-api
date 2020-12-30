@@ -4,11 +4,14 @@ import Wallet from '../entities/Wallet'
 
 @EventSubscriber()
 export class TransactionSubscriber implements EntitySubscriberInterface<Transactions> {
-
+  // Listen to changes in Transactions Repository
   listenTo(): any {
     return Transactions;
   }
 
+  // After each new Transaction the balance is calculated based on the category
+  // of the transaction. If it is a 'INCOMING' the amount it will be added in the total balance,
+  // if it is a 'OUTGOING' the amount it will be discounted from the balance.
   async afterInsert(event: InsertEvent<Transactions>): Promise<any> {
     const price = event.entity.amount
     const category = event.entity.category

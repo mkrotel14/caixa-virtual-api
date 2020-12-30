@@ -12,7 +12,7 @@ export default class WalletRepository implements IWalletRepository {
     this._walletRepository = getRepository(Wallet);
   }
 
-
+  // Get Client Wallet and it's transactions.
   public async get(_id: string): Promise<Wallet> {
     return await this._walletRepository.findOneOrFail({
       relations: ['transaction'],

@@ -6,6 +6,18 @@ enum Category {
   OUTGOING = 'Outgoing'
 }
 
+/**
+ * TRANSACTION ENTITY
+ * 
+ * _id: UUID Transaciton identifier;
+ * walletId: UUID Wallet identifier (same _id as Wallet);
+ * amount: Transaciton amount (to be sent in cents);
+ * category: Transaction category (Incoming/Outgoing);
+ * description: Transaction description;
+ * date: Transaction date
+ *  
+ */
+
 @Entity('transactions')
 export default class Transactions {
   @PrimaryGeneratedColumn('uuid')

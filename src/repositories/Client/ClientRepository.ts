@@ -4,27 +4,25 @@ import Client from '../../entities/Client';
 import IClientRepository from './IClientRepository';
 import IClientDTO from './IClientDTO';
 import Util from '../../util';
-import Wallet from '../../entities/Wallet';
 
 export default class ClientRepository implements IClientRepository {
   private _clientRepository: Repository<Client>
-  private _walletRepository: Repository<Wallet>
   private _util: Util
 
   constructor() {
     this._clientRepository = getRepository(Client)
-    this._walletRepository = getRepository(Wallet)
     this._util = new Util()
   }
 
-  // Create a new Client and it's Wallet
+  // Create a new Client. Check InsertEventSubscriber for the Client,
+  // this adds a new Wallet with the same _id as the Client.
   public async add(client: IClientDTO): Promise<Client> {
     client.password = this._util.hashPassword(client.password)    
     return await this._clientRepository.save(client)
   }
 
 
-  // Authenticate Client and generate Access Token
+  // Authenticate Client and generate an AccessToken
   public async auth({taxId, password}: IClientDTO): Promise<string> {
     const client = await this._clientRepository.findOneOrFail({where: {taxId}})
     

@@ -16,12 +16,14 @@ class App {
     this.connect('default')
   }
 
+  // Setup new Database connection
   private async connect(connectionName: string): Promise<Connection> {
     const database = new Database()
     const connection = await database.getConnection(connectionName)
     return connection
   }
 
+  // Setup Express middlewares
   private config(): void {
     this.app.use(helmet())
     this.app.use(bodyParser.json())

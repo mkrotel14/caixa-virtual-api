@@ -11,6 +11,7 @@ export default class TransactionsRepository implements ITransactionsRepository {
     this._transactionsRepository = getRepository(Transactions)
   }
 
+  // Create a new Transaction
   public async add(transaction: ITransactionsDTO): Promise<Transactions[]> {
     return await this._transactionsRepository.save(transaction)
   }

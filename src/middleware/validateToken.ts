@@ -6,7 +6,9 @@ export const validateToken = (req: Request, res: Response, next: NextFunction) =
     let token = <string>req.headers['authorization']
 
     if (token.startsWith('Bearer ')) token = token.slice(7, token.length)
-    console.log(process.env.JWT_TOKEN)
+
+    // Add client _id in the response local variables to be used as the
+    // identifier in queries
     res.locals._id = jwt.verify(token, `${process.env.JWT_TOKEN}`)
     
     next()

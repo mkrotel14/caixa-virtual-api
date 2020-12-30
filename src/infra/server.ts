@@ -18,6 +18,7 @@ class Server {
     this.exec()
   }
 
+  // Create a new https server
   private exec(): void {
     const server = this._http.createServer(this._app)    
     server.listen(this._port);

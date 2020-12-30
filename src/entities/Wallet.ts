@@ -2,6 +2,15 @@ import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, Unique 
 import Client from "./Client";
 import Transactions from "./Transactions";
 
+/**
+ * WALLET ENTITY
+ * 
+ * _id: Wallet indentifier (same _id as Client);
+ * balance: Wallet total amount (in cents);
+ * transaction: Wallet transactions
+ * 
+ */
+
 @Entity('wallet')
 @Unique(['_id'])
 export default class Wallet {

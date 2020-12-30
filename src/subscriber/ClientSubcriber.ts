@@ -4,11 +4,12 @@ import Wallet from '../entities/Wallet'
 
 @EventSubscriber()
 export class ClientSubscriber implements EntitySubscriberInterface<Client> {
-
+  // Listen to changes in Client Repository
   listenTo(): any {
     return Client;
   }
 
+  // Inserting a new Client generate a new Wallet with the same _id.
   async afterInsert(event: InsertEvent<Client>): Promise<any>{
     const wallet = new Wallet()
     
