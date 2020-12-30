@@ -1,10 +1,13 @@
 import {container} from 'tsyringe';
 
-import TransactionsRepository from 'src/repositories/Transactions/TransactionRepository'
-import ITransactionsRepository from 'src/repositories/Transactions/ITransactionsRepository'
+import TransactionsRepository from '../repositories/Transactions/TransactionRepository'
+import ITransactionsRepository from '../repositories/Transactions/ITransactionsRepository'
 
-import WalletRepository from 'src/repositories/Wallet/WalletRepository'
-import IWalletRepository from 'src/repositories/Wallet/IWalletRepository'
+import WalletRepository from '../repositories/Wallet/WalletRepository'
+import IWalletRepository from '../repositories/Wallet/IWalletRepository'
+
+import ClientRepository from '../repositories/Client/ClientRepository'
+import IClientRepository from '../repositories/Client/IClientRepository'
 
 container.registerSingleton<ITransactionsRepository>(
   "TransactionsRepository",
@@ -14,4 +17,9 @@ container.registerSingleton<ITransactionsRepository>(
 container.registerSingleton<IWalletRepository>(
   "WalletRepository",
   WalletRepository
+)
+
+container.registerSingleton<IClientRepository>(
+  "ClientRepository",
+  ClientRepository
 )
