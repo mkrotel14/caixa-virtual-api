@@ -1,4 +1,4 @@
-import Transactions from "src/entities/Transactions";
+import Transactions from "../../entities/Transactions";
 
 export default interface IWalletDTO {
   id: string;
