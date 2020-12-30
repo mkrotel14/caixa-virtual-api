@@ -1,9 +1,35 @@
-import express from 'express'
+import express from 'express';
+import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import { Connection } from 'typeorm';
+import dotenv from 'dotenv'
 
-import routes from './routes'
+import routes from './routes';
+import Database from './infra/typeorm';
 
-const app = express();
+class App {
+  public app: express.Application;
 
-app.use(routes)
+  constructor() {
+    this.app = express();
+    this.config();
+    this.connect('default')
+  }
 
-export default app
+  private async connect(connectionName: string): Promise<Connection> {
+    const database = new Database()
+    const connection = await database.getConnection(connectionName)
+    return connection
+  }
+
+  private config(): void {
+    this.app.use(helmet())
+    this.app.use(bodyParser.json())
+    this.app.use(bodyParser.urlencoded({extended: false}))
+    this.app.use(routes);
+
+    dotenv.config()
+  }
+}
+
+export default new App().app;
