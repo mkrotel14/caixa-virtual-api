@@ -1,8 +1,11 @@
-import { Category } from "src/enum/Category";
+enum Category {
+  INCOMING = 'Incoming',
+  OUTGOING = 'Outgoing'
+}
 
 export default interface ITransactionsDTO {
   _id?: string
-  wallet: string;
+  walletId: string;
   amount: number;
   description: string;
   category: Category;
