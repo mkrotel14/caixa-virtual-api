@@ -1,12 +1,12 @@
-import {injectable, inject} from 'tsyringe'
-import Wallet from 'src/entities/Wallet';
-import IWalletRepository from 'src/repositories/Wallet/IWalletRepository';
+import {injectable} from 'tsyringe'
+
+import Wallet from '../../entities/Wallet';
+import WalletRepository from '../../repositories/Wallet/WalletRepository';
 
 @injectable()
 export default class WalletGetService {
   constructor(
-    @inject("WalletRepository")
-    private _walletRepository: IWalletRepository
+    private _walletRepository: WalletRepository
   ) {}
 
   public async get(_id: string): Promise<Wallet | undefined> {
