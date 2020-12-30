@@ -1,13 +1,19 @@
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, Unique } from "typeorm";
+import Client from "./Client";
 import Transactions from "./Transactions";
 
 @Entity('wallet')
+@Unique(['_id'])
 export default class Wallet {
-  @Column()
-  id: string;
+  @PrimaryColumn('uuid')
+  _id: string;
 
   @Column()
-  totalAmount: number;
+  balance: number;
+
+  @OneToOne(() => Client, client => client.wallet)
+  @JoinColumn({name: '_id'})
+  client: Client
 
   @OneToMany(() => Transactions, (transactions) => transactions.wallet)
   transaction: Transactions[];

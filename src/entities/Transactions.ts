@@ -1,5 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {Category} from 'src/enum/Category'
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Wallet from "./Wallet";
+
+enum Category {
+  INCOMING = 'Incoming',
+  OUTGOING = 'Outgoing'
+}
 
 @Entity('transactions')
 export default class Transactions {
@@ -7,7 +12,7 @@ export default class Transactions {
   _id: string;
 
   @Column()
-  wallet: string
+  walletId: string
 
   @Column()
   amount: number
@@ -22,6 +27,10 @@ export default class Transactions {
   @Column()
   description: string
 
-  @Column({type: 'timestamp'})
+  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   date: Date
+
+  @ManyToOne(() => Wallet, wallet => wallet.transaction)
+  @JoinColumn({name: 'walletId'})
+  wallet: Wallet
 }
