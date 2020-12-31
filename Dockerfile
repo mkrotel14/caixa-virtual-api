@@ -11,11 +11,11 @@ RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 # Install PM2
 RUN yarn global add pm2
 
-USER node
-
 # Create the workdir
 RUN mkdir app && chown -R node:node /app
 WORKDIR /app
+
+USER node
 
 COPY --chown=node:node . .
 
