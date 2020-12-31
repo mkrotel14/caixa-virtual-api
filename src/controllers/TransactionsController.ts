@@ -1,10 +1,10 @@
-import {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import {container} from 'tsyringe';
 
 import TransactionsAddService from '../services/Transactions/TransactionsAddService'
 
 export default class TransactionsController {
-  public async save(req: Request, res: Response): Promise<Response> {
+  public async save(req: Request, res: Response, next: NextFunction): Promise<Response | undefined> {
     try {
       const {_id} = res.locals
       req.body.walletId = _id;
@@ -12,8 +12,7 @@ export default class TransactionsController {
       const transactionsService = container.resolve(TransactionsAddService)  
       return res.send( await transactionsService.add(req.body))
     } catch (error) {
-      console.log(error)
-      return res.status(400).send(error);
+      next(error)
     }
   }
 }
