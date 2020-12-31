@@ -22,4 +22,19 @@ export default class Database {
     }
     return connection;
   }
+
+  public async close() {
+    const connection = await this.getConnection('default');
+    await connection.close();
+  }
+
+  public async clear() {
+    const connection = await this.getConnection('default');
+    const entities = connection.entityMetadatas;
+
+    entities.map(async entity => {
+      const repository = connection.getRepository(entity.name);
+      await repository.query(`DELETE FROM ${entity.tableName}`);
+    })
+  }
 }

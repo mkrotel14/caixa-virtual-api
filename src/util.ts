@@ -6,7 +6,7 @@ export default class Util {
     return bcrypt.hashSync(password, 8)
   }
 
-  public validatePassword(unencriptedPassword: string, password: string): boolean {
+  public validatePassword(unencriptedPassword: string, password: string): boolean {    
     return bcrypt.compareSync(unencriptedPassword, password)
   }
 
