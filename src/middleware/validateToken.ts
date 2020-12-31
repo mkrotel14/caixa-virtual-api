@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from 'express'
 import * as jwt from 'jsonwebtoken'
+import ApiError from './ApiError'
 
 export const validateToken = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -13,6 +14,6 @@ export const validateToken = (req: Request, res: Response, next: NextFunction) =
     
     next()
   } catch (error) {
-    return res.status(401).send(error)    
+    throw new ApiError(error.message, 401)    
   }
 }
