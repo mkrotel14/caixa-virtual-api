@@ -1,16 +1,20 @@
 module.exports = {
   name: 'default',
   type: 'postgres',
-  host:
-    process.env.NODE_ENV == 'production' ? process.env.DB_HOST : 'localhost',
-  port: 5432,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB,
+  url: process.env.DATABASE_URL,
   logging: false,
-  entities: ['./build/entities/*.js'],
-  migrations: ['./build/migrations/*.js'],
-  subscribers: ['./build/subscriber/*.js'],
+  entities:
+    process.env.NODE_ENV == 'production'
+      ? ['./build/entities/*.js']
+      : ['./src/entities/*.ts'],
+  migrations:
+    process.env.NODE_ENV == 'production'
+      ? ['./build/migrations/*.js']
+      : ['./src/migrations/*.ts'],
+  subscribers:
+    process.env.NODE_ENV == 'production'
+      ? ['./build/subscriber/*.js']
+      : ['./src/subscriber/*.ts'],
   cli: {
     migrationsDir: 'src/migrations',
   },
