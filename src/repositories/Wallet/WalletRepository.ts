@@ -1,10 +1,10 @@
-import Wallet from '../../entities/Wallet';
-import {Repository, getRepository, EntityRepository} from 'typeorm';
-import IWalletRepository from './IWalletRepository';
-import { injectable } from 'tsyringe';
+import {Repository, getRepository} from 'typeorm';
 
-@injectable()
-@EntityRepository()
+import Wallet from '../../entities/Wallet';
+import IWalletRepository from './IWalletRepository';
+
+import { ErrorHandler } from '../../helpers/error';
+
 export default class WalletRepository implements IWalletRepository {
   private _walletRepository: Repository<Wallet>;
 
@@ -13,10 +13,14 @@ export default class WalletRepository implements IWalletRepository {
   }
 
   // Get Client Wallet and it's transactions.
-  public async get(_id: string): Promise<Wallet> {
-    return await this._walletRepository.findOneOrFail({
-      relations: ['transaction'],
-      where: {_id}
-    })
+  public async get(_id: string): Promise<Wallet | undefined> {
+    try {
+      return await this._walletRepository.findOneOrFail({
+        relations: ['transaction'],
+        where: {_id}
+      })
+    } catch (error) {
+      throw new ErrorHandler(error.message, 500)
+    }
   }
 }
