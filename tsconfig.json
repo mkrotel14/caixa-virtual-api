@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "CommonJS",
+    "module": "commonjs",
     "sourceMap": true,
     "outDir": "./build",
     "moduleResolution": "node",
