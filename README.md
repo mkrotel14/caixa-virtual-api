@@ -1,6 +1,9 @@
 <h1 align="center">Caixa Virtual API</h1>
 A NodeJS API built with TypeScript and SOLID pattern
 
+## Documentation
+To check the API documentaton and endpoints, see [Documentation](https://documenter.getpostman.com/view/8332628/TVt2bNzS)
+
 ## Install dependencies
 ```
 ## Yarn
