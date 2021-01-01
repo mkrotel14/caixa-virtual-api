@@ -1,23 +1,19 @@
 import faker from 'faker';
 import supertest from 'supertest';
-
 import server from '../../infra/server'
 import Database from '../../infra/typeorm'
 
 import {add} from '../../repositories/Client/fakes/FakeClientRepository'
 
 let apptest: any
+
 const db = new Database()
 
-beforeAll(async () => {  
-  await db.getConnection('default');
+beforeAll(async () => {
+  await db.connection()
   apptest = supertest(server);
 })
 
-afterAll(async () => {
-  await db.clear();
-  await db.close();
-})
 
 describe("POST /client", () => {
   it("should return 200 & valid response for valid user", async done => {

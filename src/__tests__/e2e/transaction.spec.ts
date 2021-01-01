@@ -1,5 +1,4 @@
 import faker from 'faker';
-import { endianness } from 'os';
 import supertest from 'supertest';
 
 import server from '../../infra/server';
@@ -9,16 +8,11 @@ import {add} from '../../repositories/Client/fakes/FakeClientRepository';
 
 let apptest: any;
 
-const db = new Database();
+const db = new Database()
 
-beforeAll(async () => {  
-  await db.getConnection('default');
+beforeAll(async () => {
+  await db.connection()
   apptest = supertest(server);
-})
-
-afterAll(async () => {
-  await db.clear();
-  await db.close();
 })
 
 describe("POST /transaction", () => {
