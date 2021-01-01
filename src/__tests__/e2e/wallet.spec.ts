@@ -1,6 +1,6 @@
 import faker from 'faker';
-import { endianness } from 'os';
 import supertest from 'supertest';
+import { createConnections } from 'typeorm';
 
 import server from '../../infra/server';
 import Database from '../../infra/typeorm';
@@ -9,16 +9,11 @@ import {add} from '../../repositories/Client/fakes/FakeClientRepository';
 
 let apptest: any;
 
-const db = new Database();
+const db = new Database()
 
 beforeAll(async () => {  
-  await db.getConnection('default');
+  await db.connection()
   apptest = supertest(server);
-})
-
-afterAll(async () => {
-  await db.clear();
-  await db.close();
 })
 
 describe("GET /wallet", () => {

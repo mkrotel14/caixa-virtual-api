@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
-import { Connection } from 'typeorm';
+import { createConnections, Connection } from 'typeorm';
 import dotenv from 'dotenv'
 // import {errors} from 'celebrate'
 
@@ -15,14 +15,13 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    this.connect('default');
+    this.connect();
   }
 
   // Setup new Database connection
-  private async connect(connectionName: string): Promise<Connection> {
-    const database = new Database();
-    const connection = await database.getConnection(connectionName);
-    return connection;
+  private async connect(): Promise<Connection> {
+    const db = new Database()
+    return await db.connection()
   }
 
   // Setup Express middlewares
