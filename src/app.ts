@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
-import { createConnections, Connection } from 'typeorm';
+import { Connection } from 'typeorm';
 import dotenv from 'dotenv'
-// import {errors} from 'celebrate'
+import cors from 'cors'
 
 import {handleError} from './helpers/error'
 import routes from './routes';
@@ -31,7 +31,7 @@ class App {
     this.app.use(helmet());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({extended: false}));
-    // this.app.use(errors());
+    this.app.use(cors());
     this.app.use(routes);
 
     // Express error handler
